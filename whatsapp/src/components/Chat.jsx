@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
+import { Divider, Flex } from "@chakra-ui/react";
 import React from "react";
 import { ChatBody } from "./chatComponents/ChatBody";
 import { ChatFooter } from "./chatComponents/ChatFooter";

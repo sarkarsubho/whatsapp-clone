@@ -8,7 +8,7 @@ export const ChatHeader = () => {
     <Flex justifyContent={"space-between"} padding={"20px 20px 8px 20px"} bg={"#f4f5f4"} >
       <Flex gap={"20px"}>
         <Avatar
-          src={`https://avatars.dicebear.com/api/human/${
+          src={`https://avatars.dicebear.com/api/avataaars/${
             (Math.random() * 1000) | 0
           }.svg`}
         ></Avatar>

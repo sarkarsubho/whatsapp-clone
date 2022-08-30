@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiDonutChartFill } from "react-icons/ri";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 import { MdOutlineMoreVert } from "react-icons/md";
@@ -7,8 +7,24 @@ import { MdSearch } from "react-icons/md";
 
 import { SidebarChat } from "./SidebarChat";
 import { BiFilter } from "react-icons/bi";
+import {data} from "../firebase";
 
 export const Sidebar = () => {
+   const [rooms,setRooms]=useState([]);
+   console.log(data);
+   useEffect(()=>{
+      // db.collection('rooms').onSnapshot(snapshot=>(
+      //   // coming from firebase Database id means the room id
+      //   setRooms(snapshot.docs.map((doc)=>({
+      //     id:doc.id,
+      //     data:doc.data()
+      //   })
+      //   ))
+      // ))
+      // Get a list of cities from your database
+
+   },[])
+
   return (
     <Flex direction={"column"} gap={"10px"} width={["40%" ,"40%","40%","25%"]}>
       <Flex justifyContent={"space-between"} padding="15px" bg={"#f4f5f4"}>
@@ -55,7 +71,10 @@ export const Sidebar = () => {
         overflowX={"hidden"}
         background={"white"}
       >
-        <SidebarChat></SidebarChat>
+        {rooms.map((e)=>{
+          return <SidebarChat key={e.id} id={e.id} name={e.data.name}></SidebarChat>
+        })}
+        
         <SidebarChat></SidebarChat>
         <SidebarChat></SidebarChat>
         <SidebarChat></SidebarChat>

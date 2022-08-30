@@ -16,7 +16,7 @@ const [rand,setRand]=useState("");
       <Flex direction={"column"} _hover={{ bg: "#F0F2F5" }}>
         <Flex alignItems={"center"} padding="15px" gap={"10px"}>
           <Avatar
-            src={`https://avatars.dicebear.com/api/human/${rand}.svg`}
+            src={`https://avatars.dicebear.com/api/avataaars/${rand}.svg`}
           ></Avatar>
           <Box>
             <Heading as="h5" size="md">
