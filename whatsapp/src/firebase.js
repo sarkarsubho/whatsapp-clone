@@ -1,14 +1,14 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp} from "firebase/app";
-import {getAuth} from "firebase/auth";
-import {getFirestore,collection,getDocs} from "firebase/firestore"
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp} from "firebase/app";
+// import {getAuth} from "firebase/auth";
+// import {getFirestore,collection,getDocs} from "firebase/firestore"
+// import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+import firebase from "firebase";
 
 
 const firebaseConfig = {
@@ -23,19 +23,19 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-const firebaseApp =initializeApp(firebaseConfig);
+const firebaseApp =firebase.initializeApp(firebaseConfig);
+const db=firebaseApp.firestore();
+const auth=firebase.auth();
+const provider =new firebase.auth.GoogleAuthProvider();
+
+
 // const analytics = getAnalytics(firebaseApp);
-const auth =getAuth(firebaseApp);
-const db=getFirestore(firebaseApp);
+// const auth =getAuth(firebaseApp);
+// const db=getFirestore(firebaseApp);
 
 // Get a list of cities from your database
-async function getCities(db) {
-  const citiesCol = collection(db, 'rooms');
-  const citySnapshot = await getDocs(citiesCol);
-  const cityList =  citySnapshot.docs.map(doc => doc.data());
-  return cityList;
-}
 
-let data= getCities(db);
-export{auth ,data};
+
+
+export{auth ,provider};
 export default db;

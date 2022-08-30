@@ -3,7 +3,7 @@ import React from "react";
 import { MdSearch } from "react-icons/md";
 import { MdOutlineMoreVert } from "react-icons/md";
 
-export const ChatHeader = () => {
+export const ChatHeader = ({roomName}) => {
   return (
     <Flex justifyContent={"space-between"} padding={"20px 20px 8px 20px"} bg={"#f4f5f4"} >
       <Flex gap={"20px"}>
@@ -15,9 +15,9 @@ export const ChatHeader = () => {
 
         <Box>
           <Heading as="h5" size="md">
-            Subhankar Sarkar
+            {roomName}
           </Heading>
-          <Text>Last seen...</Text>
+          <Text>{"Last seen "}{new Date().toLocaleTimeString()}</Text>
         </Box>
       </Flex>
 

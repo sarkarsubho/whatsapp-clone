@@ -1,34 +1,35 @@
 import { Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "./ChatBody.module.css";
 
-export const ChatBody = () => {
+export const ChatBody = ({ messages }) => {
+
+  const {user}=useSelector(state=>state.auth);
   return (
-    <Flex direction={"column"} className={styles.chatBody} flex={1} gap={"20px"}>
-
-      <Text className={`${styles.chatMessage} ${true && styles.chatRecieve}`}>
+    <Flex
+      direction={"column"}
+      className={styles.chatBody}
+      flex={1}
+      gap={"20px"}
+    >
+       {messages.map((e,i)=>{
+        
+      return   <Text key={i} className={`${styles.chatMessage} ${(e.name===user.displayName) && styles.chatRecieve}`}>
         <Text as="span" className={styles.chatName}>
           {" "}
-          Sender Name
+         {e.name}
         </Text>
-        Hey guyes !
+        {e.message}
         <Text as="span" className={styles.timeStamp}>
           {" "}
-          3.40 pm
+          {`${new Date().toUTCString()}`}
+          {/* {e.timeStamp} */}
         </Text>
       </Text>
+    })}
+    
 
-      <Text className={styles.chatMessage}>
-        <Text as="span" className={styles.chatName}>
-          {" "}
-          Sender Name
-        </Text>
-        Hey guyes !
-        <Text as="span" className={styles.timeStamp}>
-          {" "}
-          3.40 pm
-        </Text>
-      </Text>
     </Flex>
   );
 };

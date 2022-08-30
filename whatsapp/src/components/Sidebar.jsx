@@ -7,28 +7,35 @@ import { MdSearch } from "react-icons/md";
 
 import { SidebarChat } from "./SidebarChat";
 import { BiFilter } from "react-icons/bi";
-import {data} from "../firebase";
+import db from "../firebase";
+import { useSelector } from "react-redux";
 
 export const Sidebar = () => {
    const [rooms,setRooms]=useState([]);
-   console.log(data);
+   const {user}=useSelector(state=>state.auth);
+   
    useEffect(()=>{
-      // db.collection('rooms').onSnapshot(snapshot=>(
-      //   // coming from firebase Database id means the room id
-      //   setRooms(snapshot.docs.map((doc)=>({
-      //     id:doc.id,
-      //     data:doc.data()
-      //   })
-      //   ))
-      // ))
-      // Get a list of cities from your database
+    const unsubscribe = db.collection("rooms").onSnapshot((snapshot)=>{})
+    // Get a list of cities from your database
+      db.collection('rooms').onSnapshot(snapshot=>(
+        // coming from firebase Database id means the room id
+        setRooms(snapshot.docs.map((doc)=>({
+          id:doc.id,
+          data:doc.data()
+        })
+        ))
+      ))
+      //deattached the room when unmount
+      return ()=>{
+        unsubscribe();
+      }
 
    },[])
 
   return (
     <Flex direction={"column"} gap={"10px"} width={["40%" ,"40%","40%","25%"]}>
       <Flex justifyContent={"space-between"} padding="15px" bg={"#f4f5f4"}>
-        <Avatar src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"></Avatar>
+        <Avatar src={user?.photoURL}></Avatar>
 
         <Flex justifyContent={"center"} alignItems={"center"} fontSize="20px">
           <Button padding={0} variant="ghost" margin={0} rounded="50%">
@@ -71,14 +78,15 @@ export const Sidebar = () => {
         overflowX={"hidden"}
         background={"white"}
       >
+        <SidebarChat addNewChat></SidebarChat>
         {rooms.map((e)=>{
           return <SidebarChat key={e.id} id={e.id} name={e.data.name}></SidebarChat>
         })}
         
+        {/* <SidebarChat></SidebarChat>
         <SidebarChat></SidebarChat>
         <SidebarChat></SidebarChat>
-        <SidebarChat></SidebarChat>
-        <SidebarChat></SidebarChat>
+        <SidebarChat></SidebarChat> */}
       </Box>
     </Flex>
   );

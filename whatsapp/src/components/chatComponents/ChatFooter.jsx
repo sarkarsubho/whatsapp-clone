@@ -4,13 +4,15 @@ import { MdInsertEmoticon } from "react-icons/md";
 import { ImAttachment } from "react-icons/im";
 import { BsFillMicFill } from "react-icons/bs";
 import { IoSendSharp } from "react-icons/io5";
-export const ChatFooter = () => {
-  const [text, setText] = useState("");
+import { useSelector } from "react-redux";
+import db from "../../firebase";
 
-  const sendMessage=()=>{
-  console.log(text);
-  setText("");
-  }
+
+export const ChatFooter = ({id,setText,sendMessage,text}) => {
+  
+  
+
+  
   return (
     <Flex
       justifyContent={"center"}
