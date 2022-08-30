@@ -1,6 +1,6 @@
-import { Divider } from "@chakra-ui/react";
+
 import "./App.css";
-import { Chart } from "./components/Chart";
+import { Chat } from "./components/Chat";
 import { Sidebar } from "./components/Sidebar";
 
 function App() {
@@ -10,8 +10,8 @@ function App() {
         {/* sidebar */}
         <Sidebar></Sidebar>
         {/* chat */}
-        {/* <Divider></Divider> */}
-        <Chart></Chart>
+      
+        <Chat></Chat>
       </div>
     </div>
   );

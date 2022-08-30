@@ -1,9 +1,34 @@
-import { Box } from "@chakra-ui/react";
-import React from "react";
+import { Avatar, Box, Divider, Flex, Heading, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+
 
 export const SidebarChat = () => {
-  return <Box overflow={"scroll"} bg="blue" flex={1} color={"white"}>
- this is side bar chat
+const [rand,setRand]=useState("");
 
-  </Box>;
+  useEffect(() => {
+  setRand((Math.random()*1000)|0)
+
+  }, []);
+  return (
+    <Flex   direction="column" gap={"20px"}>
+      {/* every contact */}
+      {/* __ add new chat */}
+      <Flex direction={"column"} _hover={{ bg: "#F0F2F5" }}>
+        <Flex alignItems={"center"} padding="15px" gap={"10px"}>
+          <Avatar
+            src={`https://avatars.dicebear.com/api/human/${rand}.svg`}
+          ></Avatar>
+          <Box>
+            <Heading as="h5" size="md">
+              Subhankar Sarkar
+            </Heading>
+            <Text>Last Message</Text>
+          </Box>
+        </Flex>
+        <Divider></Divider>
+      </Flex>
+
+      
+    </Flex>
+  );
 };
