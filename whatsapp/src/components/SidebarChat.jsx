@@ -6,6 +6,7 @@ import db from "../firebase";
 
 export const SidebarChat = ({addNewChat,name,id}) => {
 const [rand,setRand]=useState("");
+const [message,setMessage]=useState([]);
 const createChat=()=>{
   const roomName =prompt("dfsdfsdf");
   if(roomName){
@@ -15,6 +16,14 @@ const createChat=()=>{
   }
 
 }
+
+useEffect(()=>{
+  if(id){
+    db.collection('rooms').doc(id).collection('messages').orderBy('timestamp','desc').onSnapshot(snapshot=>(
+      setMessage(snapshot.docs.map((doc)=>doc.data()))
+      ))
+  }
+},[id])
   useEffect(() => {
   setRand((Math.random()*1000)|0)
 
@@ -33,7 +42,7 @@ const createChat=()=>{
             <Heading as="h5" size="md">
               {name}
             </Heading>
-            <Text>Last Message</Text>
+            <Text>{message[0]?.message}</Text>
           </Box>
         </Flex>
         <Divider></Divider>
